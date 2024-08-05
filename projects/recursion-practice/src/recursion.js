@@ -4,31 +4,122 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example:  5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5);  // 120
-var factorial = function(n) {
+
+/**
+ * I: The function receives a number.
+ * O: The function returns the factorial of the input number.
+ * C: Must use recursion.
+ * E: Return null if input number is negative. Return 1 if input number is 0.
+ */
+
+var factorial = function(n, product = 1) {
+  // EDGE CASE:
+  // Check if n is negative
+  if (n < 0) {
+    return null;
+  } 
+  // BASE:
+  // Check if n is less than 1
+  if (n < 1) {
+    // return product
+    return product;
+  }
+  // RECURSION:
+  // Multiply product by n and reassign
+  product *= n;
+  // Recursive call factorial with n - 1 & product
+  return factorial(n - 1, product);
 };
 
 // 2. Compute the sum of an array of integers.
 // Example:  sum([1, 2, 3, 4, 5, 6]);  // 21
-var sum = function(array) {
+
+/**
+ * I: The function receives an array of integers.
+ * O: The function returns the sum of the integers in the array.
+ * C: Must use recursion.
+ * E: Returns 0 for an empty array.
+ */
+
+var sum = function(array, output = 0) {
+  // BASE:
+  // Check if the length of array is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Add array[0] to output and reassign
+  output += array[0];
+  // Return the recursive call with array.slice(1) & output
+  return sum(array.slice(1), output); 
 };
 
 // 3. Sum all numbers in an array containing nested arrays.
 // Example: arraySum([1,[2,3],[[4]],5]); // 15
-var arraySum = function(array) {
+
+/**
+ * I: The function receives an array containing nested arrays.
+ * O: The function returns the sum of all numbers in the input array which may contain nested arrays.
+ * C: Must use recursion.
+ * E: Return 0 for an empty array
+ */
+
+var arraySum = function(array, output = 0) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Check if array[0] is an array
+  if (Array.isArray(array[0])) {
+    // Return recursive call of arraySum() with array[0] & output
+    return arraySum(array[0], output);
+  }
+  // Add array[0] to output and reassign
+  output += array[0];
+  // Return recursive call of arraySum() with array.slice(1) & output
+  return arraySum(array.slice(1), output);
 };
 
 // 4. Check if a number is even.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var isEven = function(n) {
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var sumBelow = function(n) {
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var range = function(x, y) {
 };
 
@@ -37,6 +128,14 @@ var range = function(x, y) {
 // 8^2 = 8 x 8 = 64.  Here, 8 is the base and 2 is the exponent.
 // Example:  exponent(4,3);  // 64
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var exponent = function(base, exp) {
 };
 
@@ -44,14 +143,38 @@ var exponent = function(base, exp) {
 // powerOfTwo(1); // true
 // powerOfTwo(16); // true
 // powerOfTwo(10); // false
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var powerOfTwo = function(n) {
 };
 
 // 9. Write a function that accepts a string a reverses it.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var reverse = function(string) {
 };
 
 // 10. Write a function that determines if a string is a palindrome.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var palindrome = function(string) {
 };
 
@@ -60,17 +183,41 @@ var palindrome = function(string) {
 // modulo(5,2) // 1
 // modulo(17,5) // 2
 // modulo(22,6) // 4
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var modulo = function(x, y) {
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
 // JavaScript's Math object.
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var multiply = function(x, y) {
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
 // JavaScript's Math object.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var divide = function(x, y) {
 };
 
@@ -79,6 +226,14 @@ var divide = function(x, y) {
 // Example:  gcd(4,36);  // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var gcd = function(x, y) {
 };
 
@@ -87,32 +242,80 @@ var gcd = function(x, y) {
 // compareStr('house', 'houses') // false
 // compareStr('', '') // true
 // compareStr('tomato', 'tomato') // true
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var compareStr = function(str1, str2) {
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var createArray = function(str){
 };
 
 // 17. Reverse the order of an array
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var reverseArr = function (array) {
 };
 
 // 18. Create a new array with a given value and length.
 // buildList(0,5) // [0,0,0,0,0]
 // buildList(7,3) // [7,7,7]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var buildList = function(value, length) {
 };
 
 // 19. Count the occurence of a value inside a list.
 // countOccurrence([2,7,4,4,1,4], 4) // 3
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var countOccurrence = function(array, value) {
 };
 
 // 20. Write a recursive version of map.
 // rMap([1,2,3], timesTwo); // [2,4,6]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var rMap = function(array, callback) {
 };
 
@@ -120,6 +323,14 @@ var rMap = function(array, callback) {
 // var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
 // countKeysInObj(testobj, 'r') // 1
 // countKeysInObj(testobj, 'e') // 2
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var countKeysInObj = function(obj, key) {
 };
 
@@ -127,11 +338,27 @@ var countKeysInObj = function(obj, key) {
 // var testobj = {'e': {'x':'y'}, 't':{'r': {'e':'r'}, 'p': {'y':'r'}},'y':'e'};
 // countValuesInObj(testobj, 'r') // 2
 // countValuesInObj(testobj, 'e') // 1
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var countValuesInObj = function(obj, value) {
 };
 
 // 23. Find all keys in an object (and nested objects) by a provided name and rename
 // them to a provided new name while preserving the value stored at that key.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var replaceKeysInObj = function(obj, key, newKey) {
 };
 
@@ -140,6 +367,14 @@ var replaceKeysInObj = function(obj, key, newKey) {
 // Example:  0, 1, 1, 2, 3, 5, 8, 13, 21, 34.....
 // fibonacci(5);  // [0, 1, 1, 2, 3, 5]
 // Note:  The 0 is not counted.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var fibonacci = function(n) {
 };
 
@@ -148,17 +383,41 @@ var fibonacci = function(n) {
 // nthFibo(5); // 5
 // nthFibo(7); // 13
 // nthFibo(3); // 2
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var nthFibo = function(n) {
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
 // var words = ['i', 'am', 'learning', 'recursion'];
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var capitalizeWords = function(input) {
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var capitalizeFirst = function(array) {
 };
 
@@ -171,16 +430,40 @@ var capitalizeFirst = function(array) {
 //   e: {e: {e: 2}, ee: 'car'}
 // };
 // nestedEvenSum(obj1); // 10
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var nestedEvenSum = function(obj) {
 };
 
 // 29. Flatten an array containing nested arrays.
 // Example: flatten([1,[2],[3,[[4]]],5]); // [1,2,3,4,5]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var flatten = function(arrays) {
 };
 
 // 30. Given a string, return an object containing tallies of each letter.
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var letterTally = function(str, obj) {
 };
 
@@ -189,18 +472,42 @@ var letterTally = function(str, obj) {
 // elements should not be changed.
 // Example: compress([1, 2, 2, 3, 4, 4, 5, 5, 5]) // [1, 2, 3, 4, 5]
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var compress = function(list) {
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
 // itself.
 // Example: augmentElements([[],[3],[7]], 5); // [[5],[3,5],[7,5]]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var augmentElements = function(array, aug) {
 };
 
 // 33. Reduce a series of zeroes to a single 0.
 // minimizeZeroes([2,0,0,0,1,4]) // [2,0,1,4]
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var minimizeZeroes = function(array) {
 };
 
@@ -208,18 +515,42 @@ var minimizeZeroes = function(array) {
 // their original sign.  The first number in the index always needs to be positive.
 // alternateSign([2,7,8,3,1,4]) // [2,-7,8,-3,1,-4]
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var alternateSign = function(array) {
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
 // Assume all numbers are single digits (less than 10).
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var numToText = function(str) {
 };
 
 // *** EXTRA CREDIT ***
 
 // 36. Return the number of times a tag occurs in the DOM.
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var tagCount = function(tag, node) {
 };
 
@@ -227,12 +558,27 @@ var tagCount = function(tag, node) {
 // Sample array:  [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]
 // console.log(binarySearch(5)) will return '5'
 
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var binarySearch = function(array, target, min, max) {
 };
 
 // 38. Write a merge sort function.
 // Sample array:  [34,7,23,32,5,62]
 // Sample output: [5,7,23,32,34,62]
+
+/**
+ * I: 
+ * O: 
+ * C: 
+ * E: 
+ */
+
 var mergeSort = function(array) {
 };
 
