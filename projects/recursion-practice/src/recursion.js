@@ -490,13 +490,28 @@ var buildList = function(value, length, output = []) {
 // countOccurrence([2,'banana',4,4,1,'banana'], 'banana') // 2
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array and a value.
+ * O: The function returns a number representing the number of time the input value
+ *    appears in the input array.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var countOccurrence = function(array, value) {
+var countOccurrence = function(array, value, total = 0) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return total
+    return total;
+  }
+  // RECURSION:
+  // Check if array[0] is strictly equal to value
+  if (array[0] === value) {
+    // Increment total by 1
+    total++;
+  }
+  // Return the recursive call of countOccurence() with array.slice(1), value, total
+  return countOccurrence(array.slice(1), value, total);
 };
 
 // 20. Write a recursive version of map.
