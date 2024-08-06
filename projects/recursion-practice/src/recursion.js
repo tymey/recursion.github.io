@@ -192,12 +192,27 @@ var range = function(x, y, output = []) {
 /**
  * I: The function receives two numbers, one represents a base and the other a power to
  *    raise the base to.
- * O: 
- * C: 
- * E: 
+ * O: The function returns a number representing the input base number raised to the
+ *    input power number.
+ * C: Must use recursion.
+ * E: N/A
  */
 
 var exponent = function(base, exp) {
+  // BASE:
+  // Check if exp is 0
+  if (exp === 0) {
+    // Return output
+    return 1
+  }
+  // RECURSION:
+  // Check if exp is negative
+  if (exp < 0) {
+    // Return the recursive call of exponent() with base & exp + 1, then divide by base
+    return exponent(base, exp + 1) / base;
+  }
+  // Return base times the recursive call of exponent() with base & exp - 1
+  return base * exponent(base, exp - 1);
 };
 
 // 8. Determine if a number is a power of two.
@@ -206,25 +221,49 @@ var exponent = function(base, exp) {
 // powerOfTwo(10); // false
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a number.
+ * O: The function returns true if the input number is a power of 2; otherwise, return 
+ *    false.
+ * C: Must use recursion.
+ * E: N/A
  */
 
 var powerOfTwo = function(n) {
+  // BASE:
+  // Check if n is less than 1
+  if (n < 1) {
+    // Return false
+    return false;
+  // Check else if n is 1
+  } else if (n === 1) {
+    // Return true
+    return true;
+  }
+  // RECURSION:
+  // Return the recursive call of powerOfTwo() with n / 2
+  return powerOfTwo(n / 2);
 };
 
 // 9. Write a function that accepts a string a reverses it.
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a string.
+ * O: The function returns a new string that is the input string in reverse.
+ * C: Must use recursion.
+ * E: N/A
  */
 
 var reverse = function(string) {
+  // BASE:
+  // Check if string's length is 0
+  if (string.length === 0) {
+    // Return ''
+    return '';
+  }
+  // RECURSION:
+  /* Return string[string.length - 1] (the last character) concatenated with the 
+     recursive call of reverse() with string.slice(0, string.length - 1) */
+  return string[string.length - 1] + reverse(string.slice(0, string.length - 1));
 };
 
 // 10. Write a function that determines if a string is a palindrome.
