@@ -439,13 +439,24 @@ var createArray = function(str, output = []){
 // 17. Reverse the order of an array
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receieves an array.
+ * O: The function returns a new array of the elements in the input array in reverse order.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var reverseArr = function (array) {
+var reverseArr = function (array, output = []) {
+  // BASE: 
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Unshift array[0] into output array
+  output.unshift(array[0]);
+  // Return the recursive call of reverseArr() with array.slice(1) & output
+  return reverseArr(array.slice(1), output);
 };
 
 // 18. Create a new array with a given value and length.
