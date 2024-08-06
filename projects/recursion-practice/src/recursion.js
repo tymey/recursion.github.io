@@ -269,13 +269,30 @@ var reverse = function(string) {
 // 10. Write a function that determines if a string is a palindrome.
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a string.
+ * O: The function returns true if the string is a palindrome; otherwise, false.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var palindrome = function(string) {
+/* Set a second default parameter testString to the first input string replacing all 
+   white spaces with empty strings and forcing it to lower case */
+var palindrome = function(string, testString = string.replaceAll(' ', '').toLowerCase()) {
+  // BASE:
+  // Check if testString's length is less than 2
+  if (testString.length < 2) {
+    // Return true
+    return true;
+  }
+  // RECURSION:
+  // Check if the first and last character of testString are different
+  if (testString[0] !== testString[testString.length - 1]) {
+    // Return false
+    return false;
+  }
+  /* Return the recursive call of palindrome() with null (since string is no longer 
+     needed) & testString.slice(1, testString.length - 1) */
+  return palindrome(null, testString.slice(1, testString.length - 1));
 };
 
 // 11. Write a function that returns the remainder of x divided by y without using the
@@ -299,13 +316,41 @@ var modulo = function(x, y) {
 // ATTENTION DO NOT LEAVE COMMENTS IN THIS FUNCTION. The test is looking for any ('/').
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives two numbers.
+ * O: The function returns the product of the two numbers.
+ * C: Must use recursion. Cannot use the * operator or JavaScript's Math object. Do not
+ *    leave comments.
+ * E: N/A
  */
 
+// BASE:
+// Check if either x OR y is 0
+  // Return 0
+// RECURSION:
+// Check if both x AND y are negative (then we want a positive solution).
+  /* Return -x (positive) plus the recursive call of multiply() with -x (positive) & 
+     -y (positive) - 1 */
+// Check else if ONLY ONE of the arguments is negative
+  // Check if x is negative
+    // Return x (negative) plus the recursive call of multiply() with x & y - 1 
+  // Check else if y is negative
+    // Return -x (negative) plus the recursive call of multiply() with x & y + 1 (y stays negative)
+// After all checks, return x (positive) plus the recursive call of multiply() with x & y -1 (positive)
+
 var multiply = function(x, y) {
+  if (y === 0 || x === 0) {
+    return 0;
+  }
+  if (x < 0 && y < 0) {
+    return -x + multiply(-x, -y - 1);
+  } else if (x < 0 || y < 0) {
+    if (x < 0) {
+      return x + multiply(x, y - 1);
+    } else if (y < 0) {
+      return -x + multiply(x, y + 1);
+    }
+  }
+  return x + multiply(x, y - 1);
 };
 
 // 13. Write a function that divides two numbers without using the / operator  or
@@ -344,26 +389,51 @@ var gcd = function(x, y) {
 // compareStr('tomato', 'tomato') // true
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives two strings.
+ * O: The function returns true if both input strings are identical; otherwise, false.
+ * C: Must use recursion.
+ * E: N/A
  */
 
 var compareStr = function(str1, str2) {
+  // BASE:
+  // Check if the lengths of BOTH str1 & str2 are 0
+  if (str1.length === 0 && str2.length === 0) {
+    // Return true
+    return true;
+  // Check else if str1[0] is NOT the same character as str2[0]
+  } else if (str1[0] !== str2[0]) {
+    // Return false
+    return false;
+  }
+  // RECURSION
+  // Return the recursive call of compareStr() with str1.slice(1) & str2.slice(1)
+  return compareStr(str1.slice(1), str2.slice(1));
 };
 
 // 16. Write a function that accepts a string and creates an array where each letter
 // occupies an index of the array.
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a string.
+ * O: The function returns an array where each letter of the input string occupies an
+ *    index of the array.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var createArray = function(str){
+var createArray = function(str, output = []){
+  // BASE:
+  // Check if str's length is 0
+  if (str.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION
+  // Assign output[output.length] (a new index at the end of output) to str[0]
+  output[output.length] = str[0];
+  // Return the recursive call of createArray() with str.slice(1) & output
+  return createArray(str.slice(1), output);
 };
 
 // 17. Reverse the order of an array
