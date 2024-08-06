@@ -464,13 +464,25 @@ var reverseArr = function (array, output = []) {
 // buildList(7,3) // [7,7,7]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a value and a number representing the length of an array.
+ * O: The function returns an array with the input length and every element set to the
+ *    input value.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var buildList = function(value, length) {
+var buildList = function(value, length, output = []) {
+  // BASE:
+  // Check if length is 0
+  if (length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION
+  // Push value into output
+  output.push(value);
+  // Return the recursive call of buildList() with value, length - 1, & output
+  return buildList(value, length - 1, output);
 };
 
 // 19. Count the occurence of a value inside a list.
