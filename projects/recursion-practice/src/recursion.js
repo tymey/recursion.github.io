@@ -87,13 +87,33 @@ var arraySum = function(array, output = 0) {
 // 4. Check if a number is even.
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a number.
+ * O: The function returns true if the input number is even; otherwise, false.
+ * C: Must use recursion. Cannot use modulus.
+ * E: N/A
  */
 
 var isEven = function(n) {
+  // BASE:
+  // Check if n is 0
+  if (n === 0) {
+    // Return true
+    return true;
+  // Check else if n is 1
+  } else if (n === 1) {
+    // Return false
+    return false;
+  }
+  // RECURSION:
+  // Check if n is greater than 1
+  if (n > 1) {
+    // Return the recursive call of isEven() with n - 2
+    return isEven(n - 2);
+  // Check else if n is negative
+  } else if (n < 0) {
+    // Return the recursive call of isEven() with n + 2
+    return isEven(n + 2);
+  }
 };
 
 // 5. Sum all integers below a given integer.
@@ -101,26 +121,66 @@ var isEven = function(n) {
 // sumBelow(7); // 21
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a number representing an integer.
+ * O: The function returns a number representing the sum of all integers below the 
+ *    input number (exclusive).
+ * C: Must use recursion.
+ * E: If input number is negative, return the sum of all integers above the input
+ *    number until it reaches zero.
  */
 
-var sumBelow = function(n) {
+var sumBelow = function(n, output = 0) {
+  // BASE:
+  // Check if n is -1, 0, or 1
+  if (n === -1 || n === 0 || n === 1) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Check if n is negative
+  if (n < 0) {
+    // Add n + 1 to output and reassign
+    output += n + 1;
+    // Return recursive call of sumBelow() with n + 1 & output
+    return sumBelow(n + 1, output);
+  }
+  // Add n - 1 to output and reassign
+  output += n - 1;
+  // Return recursive call of sumBelow() with n - 1 & output
+  return sumBelow(n - 1, output);
 };
 
 // 6. Get the integers in range (x, y).
 // Example:  range(2, 9);  // [3, 4, 5, 6, 7, 8]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives two numbers representing a range.
+ * O: The function returns an array of all of the integers within the range
+ *    indicated by the input numbers (exluding the input numbers).
+ * C: Must use recursion.
+ * E: If the first argument is larger than the second, the output array should 
+ *    be in reverse order.
  */
 
-var range = function(x, y) {
+var range = function(x, y, output = []) {
+  // BASE:
+  // Check if the absolute value of x - y is less than or equal to 1
+  if (Math.abs(x - y) <= 1) {
+    // Return the output
+    return output;
+  }
+  // RECURSION:
+  // Check if x < y
+  if (x < y) {
+    // Push x + 1 into output
+    output.push(x + 1);
+    // Return recursive call of range() with x + 1, y & output
+    return range(x + 1, y, output);
+  }
+  // Push x - 1 into output
+  output.push(x - 1);
+  // Return recursive call of range() with x - 1, y, & output
+  return range(x - 1, y, output);
 };
 
 // 7. Compute the exponent of a number.
@@ -130,7 +190,8 @@ var range = function(x, y) {
 // https://www.khanacademy.org/computing/computer-science/algorithms/recursive-algorithms/a/computing-powers-of-a-number
 
 /**
- * I: 
+ * I: The function receives two numbers, one represents a base and the other a power to
+ *    raise the base to.
  * O: 
  * C: 
  * E: 
