@@ -518,13 +518,25 @@ var countOccurrence = function(array, value, total = 0) {
 // rMap([1,2,3], timesTwo); // [2,4,6]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array and a function.
+ * O: The function returns a new array of the elements of the input array passed through
+ *    the input function.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var rMap = function(array, callback) {
+var rMap = function(array, callback, output = []) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Push the result of invoking callback() with array[0] into output array
+  output.push(callback(array[0], 0, array));
+  // Return the recursive call of rMap() with array.slice(1), callback, output
+  return rMap(array.slice(1), callback, output);
 };
 
 // 21. Write a function that counts the number of times a key occurs in an object.
@@ -593,13 +605,29 @@ var fibonacci = function(n) {
 // nthFibo(3); // 2
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a nonnegative integer number.
+ * O: The function returns the number in the input number position of the Fibonacci
+ *    Sequence.
+ * C: Must use recursion.
+ * E: Return null when invoked with a negative integer.
  */
 
 var nthFibo = function(n) {
+  // EDGE CASE:
+  // Check if n is negative
+  if (n < 0) {
+    // Return null
+    return null;
+  }
+  // BASE:
+  // Check if n is 0 or 1
+  if (n === 0 || n === 1) {
+    // Return n
+    return n;
+  }
+  // RECURSION:
+  // Return the sum of recursive calling nthFibo(): nthFibo(n - 1) + nthFibo(n - 2)
+  return nthFibo(n - 1) + nthFibo(n - 2);
 };
 
 // 26. Given an array of words, return a new array containing each word capitalized.
@@ -607,26 +635,50 @@ var nthFibo = function(n) {
 // capitalizedWords(words); // ['I', 'AM', 'LEARNING', 'RECURSION']
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array of strings representing words.
+ * O: The function returns a new array containing each word in the input array capitalized.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var capitalizeWords = function(input) {
+var capitalizeWords = function(array, output = []) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Push array[0].toUpperCase() into output array
+  output.push(array[0].toUpperCase());
+  // Return the recursive call of capitalizeWords() with array.slice(1) & output
+  return capitalizeWords(array.slice(1), output);
 };
 
 // 27. Given an array of strings, capitalize the first letter of each index.
 // capitalizeFirst(['car', 'poop', 'banana']); // ['Car', 'Poop', 'Banana']
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array of strings.
+ * O: The function returns a new array of the strings in the input array with their 
+ *    first letter capitalized.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var capitalizeFirst = function(array) {
+var capitalizeFirst = function(array, output = []) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  /* Push the first letter of array[0] capitalized concatenated with the rest of 
+     array[0] into output array */
+  output.push(array[0][0].toUpperCase() + array[0].slice(1));
+  // Return the recursive call of capitalizeFirst() with array.slice(1) & output
+  return capitalizeFirst(array.slice(1), output);
 };
 
 // 28. Return the sum of all even numbers in an object containing nested objects.
