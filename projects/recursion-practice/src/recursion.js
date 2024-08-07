@@ -718,13 +718,35 @@ var flatten = function(arrays) {
 // letterTally('potato'); // {'p':1, 'o':2, 't':2, 'a':1}
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a string.
+ * O: The function returns an object contain properties that tally each letter of the
+ *    input string.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var letterTally = function(str, obj) {
+var letterTally = function(str, obj = {}) {
+  // BASE: 
+  // Check if str's length is 0
+  if (str.length === 0) {
+    // Return obj
+    return obj;
+  }
+  // RECURSION:
+  // Iterate through obj with a for-in loop
+  for (let key in obj) {
+    // Check if key === str[0]
+    if (key === str[0]) {
+      // Add 1 to obj[str[0]] and reassign
+      obj[str[0]] += 1;
+      // Return the recursive call of letterTally() with str.slice(1) & obj
+      return letterTally(str.slice(1), obj);
+    }
+  }
+  // Assign obj[str[0]] = 1
+  obj[str[0]] = 1;
+  // Return the recursive call of letterTally() with str.slice(1) & obj
+  return letterTally(str.slice(1), obj);
 };
 
 // 31. Eliminate consecutive duplicates in a list.  If the list contains repeated
@@ -734,13 +756,28 @@ var letterTally = function(str, obj) {
 // Example: compress([1, 2, 2, 3, 4, 4, 2, 5, 5, 5, 4, 4]) // [1, 2, 3, 4, 2, 5, 4]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array.
+ * O: The function returns a new array that eliminates consecutive duplicates in the 
+ *    input array.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var compress = function(list) {
+var compress = function(list, output = []) {
+  // BASE:
+  // Check if list's length is 0
+  if (list.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Check if list[0] !== output[output.length - 1](the last element in output)
+  if (list[0] !== output[output.length - 1]) {
+    // Pust list[0] into output array
+    output.push(list[0]);
+  }
+  // Return the recursive call of compress() with list.slice(1) & output
+  return compress(list.slice(1), output);
 };
 
 // 32. Augment every element in a list with a new value where each element is an array
@@ -762,13 +799,29 @@ var augmentElements = function(array, aug) {
 // minimizeZeroes([2,0,0,0,1,0,0,4]) // [2,0,1,0,4]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array of numbers.
+ * O: The function returns a new array which reduces a series of zeros in the input
+ *    array to a single zero.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var minimizeZeroes = function(array) {
+var minimizeZeroes = function(array, output = []) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  /* Check if (output[output.length - 1](the last element of output) !== 0 AND 
+     array[0] === 0) OR array[0] !== 0 */
+  if ((output[output.length - 1] !== 0 && array[0] === 0) || array[0] !== 0) {
+    // Push array[0] into output array
+    output.push(array[0]);
+  }
+  // Return the recursive call of minimizeZeroes() with array.slice(1) & output
+  return minimizeZeroes(array.slice(1), output);
 };
 
 // 34. Alternate the numbers in an array between positive and negative regardless of
@@ -777,13 +830,43 @@ var minimizeZeroes = function(array) {
 // alternateSign([-2,-7,8,3,-1,4]) // [2,-7,8,-3,1,-4]
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives an array of numbers.
+ * O: The function returns a new array of each element in the input array alternating 
+ *    between positive and negative starting with positive.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var alternateSign = function(array) {
+var alternateSign = function(array, output = []) {
+  // BASE:
+  // Check if array's length is 0
+  if (array.length === 0) {
+    // Return output
+    return output;
+  }
+  // RECURSION:
+  // Check if array[0] is positive
+  if (array[0] > 0) {
+    // Push array[0] into output array
+    output.push(array[0]);
+  } else {
+    // Push -array[0] into output array
+    output.push(-array[0]);
+  }
+  // Check if array[1] is undefined
+  if (array[1] === undefined) {
+    // Return the recursive call of alternateSign() with array.slice(1) & output
+    return alternateSign(array.slice(1), output);
+  // Check else if array[1] < 0
+  } else if (array[1] < 0) {
+    // Push array[1] into output array
+    output.push(array[1]);
+  } else {
+    // Push -array[1] into output array
+    output.push(-array[1]);
+  }
+  // Return the recursive call of alternateSign() with array.slice(2) & output
+  return alternateSign(array.slice(2), output);
 };
 
 // 35. Given a string, return a string with digits converted to their word equivalent.
@@ -791,13 +874,33 @@ var alternateSign = function(array) {
 // numToText("I have 5 dogs and 6 ponies"); // "I have five dogs and six ponies"
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives a string containing digits.
+ * O: The function returns a new string that copies the input string with the digits
+ *    replaces by their word equivalent. Assume all numbers are single digits.
+ * C: Must use recursion.
+ * E: N/A
  */
 
-var numToText = function(str) {
+var numToText = function(str, strArray = str.split(' '), output = []) {
+  // SET-UP:
+  let numArray = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+  // BASE:
+  // Check if strArray's length is 0
+  if (strArray.length === 0) {
+    // Return output.join(' ')
+    return output.join(' ');
+  }
+  // RECURSION:
+  // Check if +strArray[0] is a truthy value OR +strArray === 0
+    // + turns number strings into numbers (nonzero numbers are truthy values)
+    // NaN is a falsey value
+    // 0 is falsey so you'll need to check for 0
+  // True, Push numArray[+strArray[0]] into output array; pulls word equivalent of number to put into output
+  // False, Push strArray[0] into output array
+  (+strArray[0] || +strArray === 0) ? output.push(numArray[+strArray[0]]) : output.push(strArray[0]);
+  /* Return the recursive call of numToText() with null(string is no longer needed), 
+     strArray.slice(1), & output */
+  return numToText(null, strArray.slice(1), output);
 };
 
 // *** EXTRA CREDIT ***
