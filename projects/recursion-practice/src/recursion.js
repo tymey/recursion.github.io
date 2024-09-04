@@ -66,22 +66,14 @@ var sum = function(array, output = 0) {
  */
 
 var arraySum = function(array, output = 0) {
-  // BASE:
-  // Check if array's length is 0
-  if (array.length === 0) {
-    // Return output
-    return output;
+  for (let i = 0; i < array.length; i++) {
+    if (Array.isArray(array[i])) {
+      output += arraySum(array[i]);
+    } else {
+      output += array[i];
+    }
   }
-  // RECURSION:
-  // Check if array[0] is an array
-  if (Array.isArray(array[0])) {
-    // Return recursive call of arraySum() with array[0] & output
-    return arraySum(array[0], output);
-  }
-  // Add array[0] to output and reassign
-  output += array[0];
-  // Return recursive call of arraySum() with array.slice(1) & output
-  return arraySum(array.slice(1), output);
+  return output;
 };
 
 // 4. Check if a number is even.
@@ -302,13 +294,32 @@ var palindrome = function(string, testString = string.replaceAll(' ', '').toLowe
 // modulo(22,6) // 4
 
 /**
- * I: 
- * O: 
- * C: 
- * E: 
+ * I: The function receives two numbers.
+ * O: The function returns the remainder of the first number divided by the second
+ *    number.
+ * C: Must use recursion. Cannot use the modulo operator (%).
+ * E: N/A
  */
 
 var modulo = function(x, y) {
+  if (x === 0 && y === 0) {
+    return NaN;
+  } else if (x === 0) {
+    return x;
+  } else if (x < 0 && y < 0 && x > y) {
+    return x;
+  } else if (x < 0 && y > 0 && -x < y) {
+    return x;
+  } else if (x > 0 && y > 0 && x < y) {
+    return x;
+  }
+  else if (x < 0 && y < 0) {
+    return modulo(x - y, y);
+  } else if (x < 0 && y > 0) {
+    return modulo(x + y, y);
+  } else {
+    return modulo(x - y, y);
+  }
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator  or
